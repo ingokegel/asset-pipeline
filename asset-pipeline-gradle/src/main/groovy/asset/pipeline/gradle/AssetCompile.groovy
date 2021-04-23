@@ -147,7 +147,7 @@ class AssetCompile extends DefaultTask {
                 registerJarResolvers(resolverFile)
             }
             else if (isAssetFolder) {
-                def fileResolver = new FileSystemAssetResolver(path, resolverFile.canonicalPath, false)
+                def fileResolver = new FileSystemAssetResolver(path, resolverFile.canonicalPath)
                 AssetPipelineConfigHolder.registerResolver(fileResolver)
             }
         }
