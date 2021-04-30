@@ -47,6 +47,9 @@ class AssetCompile extends DefaultTask {
     @Delegate(methodAnnotations = true) private AssetPipelineExtension pipelineExtension = new AssetPipelineExtensionImpl()
     //private FileCollection classpath;
 
+    @Input
+    boolean flattenResolvers = false
+
     @OutputDirectory
     File getDestinationDir() {
         pipelineExtension.compileDir ? new File(pipelineExtension.compileDir) : null
@@ -147,7 +150,7 @@ class AssetCompile extends DefaultTask {
                 registerJarResolvers(resolverFile)
             }
             else if (isAssetFolder) {
-                def fileResolver = new FileSystemAssetResolver(path, resolverFile.canonicalPath)
+                def fileResolver = new FileSystemAssetResolver(path, resolverFile.canonicalPath, flattenResolvers)
                 AssetPipelineConfigHolder.registerResolver(fileResolver)
             }
         }
